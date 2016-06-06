@@ -24,7 +24,7 @@ app.use(express.static('public'));
 app.set('views', './views');
 app.set('view engine', 'pug');
 
-app.use(logger('combined'));
+app.use(logger('short'));
 
 app.use('/', artists);
 app.use('/users', users);
