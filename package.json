@@ -1,0 +1,30 @@
+{
+  "name": "pictureit",
+  "version": "1.0.0",
+  "description": "A bot that allows artists to connect people to there art instantly.",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "jade": "~1.11.0",
+    "morgan": "~1.6.1",
+    "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NiqueDaSneak/pictureit.git"
+  },
+  "author": "@niquedasneak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NiqueDaSneak/pictureit/issues"
+  },
+  "homepage": "https://github.com/NiqueDaSneak/pictureit#readme"
+}
