@@ -1,8 +1,51 @@
 doctype html
-html
+html(lang='en')
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title PictureIt
+    style(type='text/css').
+      body {
+      /*text-align: center;*/
+      margin: 0 auto;
+      }
+      input {
+      margin-bottom: 8vh;
+      /*border-style: inset;*/
+      border-width: 2px;
+      }
+      .welcome-message {
+      font-size: 10vh;
+      text-align: center;
+      }
+      .image-form {
+      margin-top: 3vh;
+      text-align: center;
+      }
+      .center-form {
+      display: table;
+      width: 100%;
+      }
+      .display-block {
+      display: block;
+      margin: 0 auto;
+      }
+      .center-placeholders {
+      /*text-align: center;*/
+      }
   body
-      h1= title
-  p Welcome to #{title}
+    div
+      p.welcome-message Welcome to PictureIT
+    .center-form
+      form.image-form(action='/submit-image', method='post')
+        input.display-block(type='file', name='image')
+        |  
+        input.center-placeholder.display-block(type='number', name='price', placeholder='Insert Price')
+        |  
+        input.center-placeholder.display-block(type='text', name='artist-email', placeholder='Insert Email')
+        |  
+        label Are you selling reprints?
+        |  
+        input(type='checkbox', name='one-of-one')
+        |  
+        input.display-block(type='submit', name='submit')
