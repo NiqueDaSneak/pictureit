@@ -15,10 +15,10 @@ db.once('open', function(){
 	console.log('DB is connected');
 
 	var imageSchema = mongoose.Schema({
+		imageData: String,
 		artistEmail: String,
 		price: Number,
 		startDate: Date,
-		endDate: Date,
 		oneOfOne: Boolean
 	});
 });
@@ -33,7 +33,7 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static('public'));
+app.use('/static', express.static('public'));
 
 // set up views
 app.set('views', './views');
