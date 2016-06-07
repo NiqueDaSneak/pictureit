@@ -1,1 +1,36 @@
-style.css
+body {
+	/*text-align: center;*/
+	margin: 0 auto;
+}
+
+input {
+	margin-bottom: 8vh;
+	/*border-style: inset;*/
+	border-width: 2px; 
+
+}
+
+.welcome-message {
+	font-size: 10vh;
+	text-align: center;
+}
+
+.image-form {
+	margin-top: 3vh;
+	text-align: center;
+}
+
+.center-form {
+	display: table;
+	width: 100%;
+}
+
+.display-block {
+	display: block;
+		margin: 0 auto;
+
+}
+
+.center-placeholders {
+	/*text-align: center;*/
+}
