@@ -12,9 +12,12 @@
     "body-parser": "^1.15.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.13.4",
+    "jimp": "^0.2.24",
     "mongodb": "^2.1.21",
     "mongoose": "^4.4.20",
     "morgan": "^1.7.0",
+    "pastec": "0.0.5",
+    "pastecapi": "^1.2.3",
     "pug": "^2.0.0-beta2"
   }
 }
