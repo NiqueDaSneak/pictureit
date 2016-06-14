@@ -9,7 +9,7 @@ var vision = gcloud.vision();
 
 // Facebook Messenger Webhook setup
 
-var verify_token = ;
+var verify_token = "14fc650c879aa056c98b";
 var token = ;
 
 router.get('/webhook/', function(req, res, next) {
@@ -20,7 +20,7 @@ router.get('/webhook/', function(req, res, next) {
   }
 
   res.send('Error, wrong validation token');
-  
+
 });
 
 module.exports = router;
