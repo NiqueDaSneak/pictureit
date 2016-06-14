@@ -2,8 +2,10 @@ var mongoose = require('mongoose');
 var db = require('./../db');
 
 var imageSchema = new mongoose.Schema({
-		imageData: String,
+		imageData: { data: Buffer, contentType: String },
+		artistName: String,
 		artistEmail: String,
+		nameOfPiece: String,
 		price: Number,
 		startDate: Date,
 		oneOfOne: Boolean
