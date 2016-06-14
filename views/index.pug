@@ -37,10 +37,14 @@ html(lang='en')
     div
       p.welcome-message Welcome to PictureIT
     .center-form
-      form.image-form(action='/submit-image', method='post')
+      form.image-form(action='/submit-image', method='post', enctype='multipart/form-data')
         input.display-block(type='file', name='image')
         |  
-        input.center-placeholder.display-block(type='number', name='price', placeholder='Insert Price')
+        input.center-placeholder.display-block(type='text', name='nameOfPiece', placeholder='Name This Piece:')
+        |  
+        input.center-placeholder.display-block(type='number', name='price', placeholder='Insert Price:')
+        |  
+        input.center-placeholder.display-block(type='text', name='artistName', placeholder='What is Your Name?')
         |  
         input.center-placeholder.display-block(type='text', name='artistEmail', placeholder='Insert Email')
         |  
