@@ -21,13 +21,12 @@ router.post('/submit-image', upload.single('image'), function(req, res, next) {
 		nameOfPiece: req.body.nameOfPiece,
 		price: req.body.price,
 		startDate: req._startTime,
-		oneOfOne: checkIfOneOfOne(req)
+		sellingPrints: checkIfOneOfOne(req),
+		keywords: []
 	});
-	console.log(req.file.path)
-	// console.log(newImage);
-	// console.log(newImage.price)
-	// console.log(req.file);
-	// console.log(req.body);
+
+	generateKeywords(newImage);
+	console.log(newImage);
 
 	newImage.save(function(err, newImage){
 		if (err) {
@@ -45,6 +44,17 @@ router.post('/submit-image', upload.single('image'), function(req, res, next) {
 router.get('/submission-success', function(req, res, next) {
 	res.render('successful', { title: 'Successful' });
 });
+
+// HELPER METHODS
+
+function generateKeywords(image) {
+	image.artistName.split(' ').forEach(function(word){
+		image.keywords.push(word.toLowerCase());
+	});
+	image.nameOfPiece.split(' ').forEach(function(word){
+		image.keywords.push(word.toLowerCase());
+	});
+}
 
 function checkIfOneOfOne(req) {
 	if (req.body.oneOfOne === 'on') {
