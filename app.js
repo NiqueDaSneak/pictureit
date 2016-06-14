@@ -1,6 +1,6 @@
 var express = require('express');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+// var bodyParser = require('body-parser');
 var pug = require('pug');
 var request = require('request');
 var http = require('http');
@@ -22,7 +22,9 @@ var users = require('./routes/users');
 var app = express();
 
 // set up middlewares
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(multer());
+// app.use(Busboy());
+// app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 	// work in progress

@@ -10,11 +10,13 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.15.1",
+    "busboy": "^0.2.13",
     "cookie-parser": "^1.4.3",
     "express": "^4.13.4",
     "mongodb": "^2.1.21",
     "mongoose": "^4.4.20",
     "morgan": "^1.7.0",
+    "multer": "^1.1.0",
     "pug": "^2.0.0-beta2"
   }
 }
