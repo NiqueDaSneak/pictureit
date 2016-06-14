@@ -8,7 +8,8 @@ var imageSchema = new mongoose.Schema({
 		nameOfPiece: String,
 		price: Number,
 		startDate: Date,
-		oneOfOne: Boolean
+		sellingPrints: Boolean,
+		keywords: Array
 	});
 
 	var Image = mongoose.model('Image', imageSchema);
