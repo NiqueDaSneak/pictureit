@@ -8,6 +8,9 @@ var upload = multer({ dest: 'uploads/' });
 var verify_token = "14fc650c879aa056c98b";
 var token = "EAABbvdDRlgIBAFO7ZAl40qkyOhqdcTHZAgmiAfZACxffZAv0Ot7FEBhWAZAFXnQ71ymGuwyu3JosaGYS4L9s70Q586X2f6HoEDUa3uefUB4xhBeJyBYJ0TS52dxKdemNudZBlyzHlZBj2xKSdiJ7bEIJZCJjlWMZCOuRtTzFqTQPxqwZDZD";
 
+// set up middlewares
+router.use(multer({dest:'./uploads/'}).single('image'));
+
 router.get('/webhook', function(req, res, next) {
 
   if (req.query['hub.verify_token'] === verify_token) {
