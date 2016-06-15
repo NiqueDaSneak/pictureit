@@ -6,8 +6,7 @@ var bodyParser = require('body-parser');
 
 // middleware setup
 router.use(bodyParser.urlencoded({ extended: false }));
-
-
+router.use(bodyParser.json());
 
 // Facebook Messenger Webhook setup
 
