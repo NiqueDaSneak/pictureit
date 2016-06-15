@@ -18,8 +18,11 @@ router.get('/webhook', function(req, res, next) {
 
 });
 
-router.post('/webhook', function (req, res) {
+router.post('/webhook', function (req, res, next) {
 
+	console.log('Below should be the entire req: ');
+	console.log(req);
+	console.log('Below should be the req.body: ');
 	console.log(req.body);
 
     var messaging_events = req.body.entry[0].messaging;
