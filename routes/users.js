@@ -32,7 +32,7 @@ router.post('/webhook', function (req, res) {
         if (event.message && event.message.text) {
             var text = event.message.text;
 
-            sendTextMessage(sender, "Echo: " + text;
+            sendTextMessage(sender, "Echo: " + text);
         }
     }
 
