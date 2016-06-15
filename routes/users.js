@@ -1,7 +1,5 @@
 var express = require('express');
 var router = express.Router();
-// var multer  = require('multer');
-// var upload = multer({ dest: 'uploads/' });
 var bodyParser = require('body-parser');
 var request = require('request');
 
@@ -33,33 +31,28 @@ router.post('/webhook', function (req, res, next) {
 		var event = req.body.entry[0].messaging[i];
 		var sender = event.sender.id;
 
-		// console.log(event.message.attachments[0]);
 
-// checking for images sent by user
-if (event.message.attachments[0]) {
-	if (event.message.attachments[0].type === 'image') {
-		var imageURL = event.message.attachments[0].payload.url;
-		console.log(imageURL);
-	}
+		// checking for images sent by user
+		if (event.message.attachments[0]) {
+			if (event.message.attachments[0].type === 'image') {
+				var imageURL = event.message.attachments[0].payload.url;
+				console.log(imageURL);
+			}
+		}
+
+		if (event.message && event.message.text) {
+			sendTextMessage(sender, "Thanks for using PictureIT! If you have some art you want to buy, take a photo of its description card and send it to me!");
+		}
 }
 
-if (event.message && event.message.text) {
-	var text = event.message.text;
-
-	sendTextMessage(sender, "Echo: " + text);
-}
-}
-
-res.sendStatus(200);
+	res.sendStatus(200);
 
 });
 
 function sendTextMessage(sender, text) {
-
 	var messageData = {
 		text: text
 	};
-
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
 		qs: {access_token: token},
@@ -69,13 +62,11 @@ function sendTextMessage(sender, text) {
 			message: messageData
 		}
 	}, function (error, response) {
-
 		if (error) {
 			console.log('Error sending message: ', error);
 		} else if (response.body.error) {
 			console.log('Error: ', response.body.error);
 		}
-
 	});
 
 }
