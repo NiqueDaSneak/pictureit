@@ -33,7 +33,7 @@ router.post('/webhook', function (req, res, next) {
 		var event = req.body.entry[0].messaging[i];
 		var sender = event.sender.id;
 
-		console.log(event);
+		console.log(event.attachments[0]);
 
 // checking for images sent by user
 // if (event.message.attachments) {
