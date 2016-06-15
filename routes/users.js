@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var multer  = require('multer');
 var upload = multer({ dest: 'uploads/' });
+var request = require('request');
+
 
 // Facebook Messenger Webhook setup
 
@@ -9,7 +11,7 @@ var verify_token = "14fc650c879aa056c98b";
 var token = "EAABbvdDRlgIBAFO7ZAl40qkyOhqdcTHZAgmiAfZACxffZAv0Ot7FEBhWAZAFXnQ71ymGuwyu3JosaGYS4L9s70Q586X2f6HoEDUa3uefUB4xhBeJyBYJ0TS52dxKdemNudZBlyzHlZBj2xKSdiJ7bEIJZCJjlWMZCOuRtTzFqTQPxqwZDZD";
 
 // set up middlewares
-router.use(multer({dest:'./uploads/'}).single('image'));
+// router.use(multer({dest:'./uploads/'}).single('image'));
 
 router.get('/webhook', function(req, res, next) {
 
@@ -26,9 +28,9 @@ router.post('/webhook', function (req, res, next) {
 	console.log('Below should be the entire req: ');
 	console.log(req);
 	console.log('Below should be the req.body: ');
-	console.log(req.body);
+	console.log(req.entry.messaging.message);
 
-    var messaging_events = req.body.entry[0].messaging;
+    var messaging_events = req.entry[0].messaging;
 
     for (var i = 0; i < messaging_events.length; i++) {
 
