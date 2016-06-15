@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var multer  = require('multer');
-var upload = multer({ dest: 'uploads/' });
+// var multer  = require('multer');
+// var upload = multer({ dest: 'uploads/' });
 var bodyParser = require('body-parser');
 var request = require('request');
 
@@ -16,59 +16,65 @@ var token = "EAABbvdDRlgIBAFO7ZAl40qkyOhqdcTHZAgmiAfZACxffZAv0Ot7FEBhWAZAFXnQ71y
 
 router.get('/webhook', function(req, res, next) {
 
-  if (req.query['hub.verify_token'] === verify_token) {
-  	res.send(req.query['hub.challenge']);
-  }
+	if (req.query['hub.verify_token'] === verify_token) {
+		res.send(req.query['hub.challenge']);
+	}
 
-  res.send('Error, wrong validation token');
+	res.send('Error, wrong validation token');
 
 });
 
-router.post('/webhook', upload.single('image'), function (req, res, next) {
+router.post('/webhook', function (req, res, next) {
 
-	console.log('This should be an image file: ' + req.file)
+	var messaging_events = req.body.entry[0].messaging;
 
-    var messaging_events = req.body.entry[0].messaging;
+	for (var i = 0; i < messaging_events.length; i++) {
 
-    for (var i = 0; i < messaging_events.length; i++) {
+		var event = req.body.entry[0].messaging[i];
+		var sender = event.sender.id;
 
-        var event = req.body.entry[0].messaging[i];
-        var sender = event.sender.id;
+// checking for images sent by user
+if (event.message.attachments) {
+	if (atts[0].type === 'image') {
+		var imageURL = atts[0].payload.url;
+		console.log(imageURL);
+	}
+}
 
-        if (event.message && event.message.text) {
-            var text = event.message.text;
+if (event.message && event.message.text) {
+	var text = event.message.text;
 
-            sendTextMessage(sender, "Echo: " + text);
-        }
-    }
+	sendTextMessage(sender, "Echo: " + text);
+}
+}
 
-    res.sendStatus(200);
+res.sendStatus(200);
 
 });
 
 function sendTextMessage(sender, text) {
 
-    var messageData = {
-        text: text
-    };
+	var messageData = {
+		text: text
+	};
 
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token: token},
-        method: 'POST',
-        json: {
-            recipient: {id: sender},
-            message: messageData
-        }
-    }, function (error, response) {
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: {access_token: token},
+		method: 'POST',
+		json: {
+			recipient: {id: sender},
+			message: messageData
+		}
+	}, function (error, response) {
 
-        if (error) {
-            console.log('Error sending message: ', error);
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error);
-        }
+		if (error) {
+			console.log('Error sending message: ', error);
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error);
+		}
 
-    });
+	});
 
 }
 
