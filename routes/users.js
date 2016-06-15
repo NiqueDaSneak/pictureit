@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-// var multer  = require('multer');
-// var upload = multer({ dest: 'uploads/' });
+var multer  = require('multer');
+var upload = multer({ dest: 'uploads/' });
 var bodyParser = require('body-parser');
 var request = require('request');
 
@@ -24,12 +24,9 @@ router.get('/webhook', function(req, res, next) {
 
 });
 
-router.post('/webhook', function (req, res, next) {
+router.post('/webhook', upload.single('image'), function (req, res, next) {
 
-	console.log('Below should be the entire req: ');
-	console.log(req);
-	console.log('Below should be the req.body: ');
-	console.log(req.body);
+	console.log('This should be an image file: ' + req.file)
 
     var messaging_events = req.body.entry[0].messaging;
 
