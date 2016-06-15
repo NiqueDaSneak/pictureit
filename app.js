@@ -6,6 +6,8 @@ var http = require('http');
 var path = require('path');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+var multer  = require('multer');
+var upload = multer({ dest: 'uploads/' });
 var db = require('./db');
 
 
@@ -21,7 +23,7 @@ var users = require('./routes/users');
 var app = express();
 
 // set up middlewares
-app.use(multer({dest:'./uploads/'}).single('photo'));
+app.use(multer({dest:'./uploads/'}).single('image'));
 // app.use(multer());
 // app.use(Busboy());
 // app.use(bodyParser.urlencoded({ extended: false }));
