@@ -21,6 +21,7 @@ var users = require('./routes/users');
 var app = express();
 
 // set up middlewares
+app.use(multer({dest:'./uploads/'}).single('photo'));
 // app.use(multer());
 // app.use(Busboy());
 // app.use(bodyParser.urlencoded({ extended: false }));
