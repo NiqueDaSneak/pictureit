@@ -6,7 +6,7 @@ var router = express.Router();
 var verify_token = "14fc650c879aa056c98b";
 // var token = ;
 
-router.get('/webhook/', function(req, res, next) {
+router.get('/webhook', function(req, res, next) {
   // res.render('index', { title: 'Express' });
 
   if (req.query['hub.verify_token'] === verify_token) {
