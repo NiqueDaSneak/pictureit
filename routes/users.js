@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var multer  = require('multer');
+var upload = multer({ dest: 'uploads/' });
 
 // Facebook Messenger Webhook setup
 
@@ -17,7 +19,7 @@ router.get('/webhook', function(req, res, next) {
 });
 
 router.post('/webhook', function (req, res) {
-	
+
 	console.log(req);
 
     var messaging_events = req.body.entry[0].messaging;
