@@ -16,7 +16,7 @@ router.get('/webhook', function(req, res, next) {
 
 });
 
-app.post('/webhook', function (req, res) {
+router.post('/webhook', function (req, res) {
 
     var messaging_events = req.body.entry[0].messaging;
 
