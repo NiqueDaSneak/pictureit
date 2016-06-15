@@ -3,6 +3,7 @@ var router = express.Router();
 // var multer  = require('multer');
 // var upload = multer({ dest: 'uploads/' });
 var bodyParser = require('body-parser');
+var request = require('request');
 
 // middleware setup
 router.use(bodyParser.urlencoded({ extended: false }));
