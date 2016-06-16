@@ -41,7 +41,7 @@ console.log('!!!!!!!!!!!!!' + event.message.attachments + '!!!!!!!!!!!!!');
 		} 
 
 		if (event.postback) {
-			sendTextMessage('Image recieved')
+			sendTextMessage(sender, 'Image recieved')
 			console.log(event.postback);
 
 		}
