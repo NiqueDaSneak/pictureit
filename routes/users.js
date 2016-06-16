@@ -26,7 +26,7 @@ router.post('/webhook', function (req, res, next) {
 
 	var messaging_events = req.body.entry[0].messaging;
 
-	console.log(messaging_events)
+	console.log("This is the messaging_events: "messaging_events)
 
 	for (var i = 0; i < messaging_events.length; i++) {
 
@@ -43,8 +43,9 @@ router.post('/webhook', function (req, res, next) {
 		} 
 
 		if (event.postback) {
-			sendTextMessage(sender, 'Image recieved')
-			console.log(event.postback);
+			sendTextMessage(sender, 'Image recieved');
+			console.log("This is the event.postback: "+ event.postback);
+			continue
 
 		}
 		// else if (event.message.attachments[0]) {
