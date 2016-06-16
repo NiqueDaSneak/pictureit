@@ -26,7 +26,7 @@ router.post('/webhook', function (req, res, next) {
 
 	var messaging_events = req.body.entry[0].messaging;
 
-	console.log("This is the messaging_events: " + messaging_events)
+	// console.log("This is the messaging_events: " + messaging_events)
 
 	for (var i = 0; i < messaging_events.length; i++) {
 
@@ -39,21 +39,23 @@ router.post('/webhook', function (req, res, next) {
 		// checking for images sent by user
 		if (event.message && event.message.text) {
 			sendTextMessage(sender, "Thanks for using PictureIT! If you have some art you want to buy, take a photo of its description card and send it to me!");
-			continue
 		} 
 
-		if (event.postback) {
-			sendTextMessage(sender, 'Image recieved');
-			console.log("This is the event.postback: "+ event.postback);
-			continue
+		// if (event.postback) {
+		// 	sendTextMessage(sender, 'Image recieved');
+		// 	console.log("This is the event.postback: "+ event.postback);
+		// 	continue
 
-		}
-		// else if (event.message.attachments[0]) {
-		// 	if (event.message.attachments[0].type === 'image') {
-		// 		var imageURL = event.message.attachments[0].payload.url;
-		// 		console.log(imageURL);
-		// 	}
-		// } else {
+		// }
+		if (event.message.attachments[0]) {
+			if (event.message.attachments[0].type === 'image') {
+				var imageURL = event.message.attachments[0].payload.url;
+				console.log(imageURL);
+				sendTextMessage(sender, 'Image recieved');
+			}
+		} 
+
+		// else {
 		// 	sendTextMessage(sender, "Something went wrong");
 		// }
 }
