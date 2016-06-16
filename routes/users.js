@@ -26,7 +26,7 @@ router.post('/webhook', function (req, res, next) {
 
 	var messaging_events = req.body.entry[0].messaging;
 
-	console.log("This is the messaging_events: "messaging_events)
+	console.log("This is the messaging_events: " + messaging_events)
 
 	for (var i = 0; i < messaging_events.length; i++) {
 
