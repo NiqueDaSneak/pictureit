@@ -26,13 +26,15 @@ router.post('/webhook', function (req, res, next) {
 
 	var messaging_events = req.body.entry[0].messaging;
 
+	console.log(messaging_events)
+
 	for (var i = 0; i < messaging_events.length; i++) {
 
 		var event = req.body.entry[0].messaging[i];
 		var sender = event.sender.id;
 
-console.log('XXXXXXX' + event.message.text + 'XXXXXXX');
-console.log('!!!!!!!!!!!!!' + event.message.attachments + '!!!!!!!!!!!!!');
+// console.log('XXXXXXX' + event.message.text + 'XXXXXXX');
+// console.log('!!!!!!!!!!!!!' + event.message.attachments + '!!!!!!!!!!!!!');
 
 		// checking for images sent by user
 		if (event.message && event.message.text) {
