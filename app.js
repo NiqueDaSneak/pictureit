@@ -23,12 +23,9 @@ var users = require('./routes/users');
 var app = express();
 
 // set up middlewares
-// app.use(multer({dest:'./uploads/'}).single('image'));
-// app.use(multer());
-// app.use(Busboy());
-// app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
+
 	// work in progress
 app.use('/static', express.static('public'));
 
