@@ -31,19 +31,21 @@ router.post('/webhook', function (req, res, next) {
 		var event = req.body.entry[0].messaging[i];
 		var sender = event.sender.id;
 
-// console.log(event.message);
+console.log(event.message);
+console.log(event.message);
 
 		// checking for images sent by user
 		if (event.message && event.message.text) {
 			sendTextMessage(sender, "Thanks for using PictureIT! If you have some art you want to buy, take a photo of its description card and send it to me!");
-		} else if (event.message.attachments[0]) {
-			if (event.message.attachments[0].type === 'image') {
-				var imageURL = event.message.attachments[0].payload.url;
-				console.log(imageURL);
-			}
-		} else {
-			sendTextMessage(sender, "Something went wrong");
-		}
+		} 
+		// else if (event.message.attachments[0]) {
+		// 	if (event.message.attachments[0].type === 'image') {
+		// 		var imageURL = event.message.attachments[0].payload.url;
+		// 		console.log(imageURL);
+		// 	}
+		// } else {
+		// 	sendTextMessage(sender, "Something went wrong");
+		// }
 }
 
 	res.sendStatus(200);
