@@ -14,8 +14,7 @@ var token = "EAABbvdDRlgIBAFO7ZAl40qkyOhqdcTHZAgmiAfZACxffZAv0Ot7FEBhWAZAFXnQ71y
 
 
 router.get('/webhook', function(req, res) {
-  if (req.query['hub.mode'] === 'subscribe' &&
-      req.query['hub.verify_token'] === verify_token) {
+  if (req.query['hub.verify_token'] === verify_token) {
     console.log("Validating webhook");
     res.status(200).send(req.query['hub.challenge']);
   } else {
