@@ -24,43 +24,43 @@ router.get('/webhook', function(req, res, next) {
 
 router.post('/webhook', function (req, res, next) {
 
-	var messaging_events = req.body.entry[0].messaging;
+// 	var messaging_events = req.body.entry[0].messaging;
 
-	// console.log("This is the messaging_events: " + messaging_events)
+// 	// console.log("This is the messaging_events: " + messaging_events)
 
-	for (var i = 0; i < messaging_events.length; i++) {
+// 	for (var i = 0; i < messaging_events.length; i++) {
 
-		var event = req.body.entry[0].messaging[i];
-		var sender = event.sender.id;
+// 		var event = req.body.entry[0].messaging[i];
+// 		var sender = event.sender.id;
 
-// console.log('XXXXXXX' + event.message.text + 'XXXXXXX');
-// console.log('!!!!!!!!!!!!!' + event.message.attachments + '!!!!!!!!!!!!!');
+// // console.log('XXXXXXX' + event.message.text + 'XXXXXXX');
+// // console.log('!!!!!!!!!!!!!' + event.message.attachments + '!!!!!!!!!!!!!');
 
-		// checking for images sent by user
-		if (event.message && event.message.text) {
-			sendTextMessage(sender, "Thanks for using PictureIT! If you have some art you want to buy, take a photo of its description card and send it to me!");
-		} 
+// 		// checking for images sent by user
+// 		if (event.message && event.message.text) {
+// 			sendTextMessage(sender, "Thanks for using PictureIT! If you have some art you want to buy, take a photo of its description card and send it to me!");
+// 		} 
 
-		// if (event.postback) {
-		// 	sendTextMessage(sender, 'Image recieved');
-		// 	console.log("This is the event.postback: "+ event.postback);
-		// 	continue
+// 		// if (event.postback) {
+// 		// 	sendTextMessage(sender, 'Image recieved');
+// 		// 	console.log("This is the event.postback: "+ event.postback);
+// 		// 	continue
 
-		// }
-		if (event.message.attachments[0]) {
-			if (event.message.attachments[0].type === 'image') {
-				var imageURL = event.message.attachments[0].payload.url;
-				console.log(imageURL);
-				sendTextMessage(sender, 'Image recieved');
-			}
-		} 
+// 		// }
+// 		if (event.message.attachments[0]) {
+// 			if (event.message.attachments[0].type === 'image') {
+// 				var imageURL = event.message.attachments[0].payload.url;
+// 				console.log(imageURL);
+// 				sendTextMessage(sender, 'Image recieved');
+// 			}
+// 		} 
 
-		// else {
-		// 	sendTextMessage(sender, "Something went wrong");
-		// }
-}
+// 		// else {
+// 		// 	sendTextMessage(sender, "Something went wrong");
+// 		// }
+// }
 
-	res.sendStatus(200);
+// 	res.sendStatus(200);
 
 });
 
