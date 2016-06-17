@@ -29,6 +29,8 @@ var newImage = new Image({
 // pushes keyword generated from other image data
 generateKeywords(newImage);
 
+newImage.keywords.sort();
+
 	// Handles saving a img to DB in cloud
 	newImage.save(function(err, newImage){
 		if (err) {
