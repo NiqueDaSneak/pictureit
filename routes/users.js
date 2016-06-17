@@ -3,6 +3,8 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var request = require('request');
 var gcloud = require('gcloud');
+var mongoose = require('mongoose');
+var db = require('./../db');
 
 var vision = gcloud.vision({
 	projectId: 'pictureit-1',
@@ -61,10 +63,12 @@ router.post('/webhook', function (req, res, next) {
 					if (err) {
 						console.log(err);
 					} else {
-						console.log('GOOGLE FOUND THESE WORDS: ')
-						for (var i = 0; i <= text.length - 1; i++) {
-							console.log(text[i]);
-						}
+						var googleArray = [];
+						console.log('GOOGLE FOUND THESE WORDS: ');
+						text.forEach(function(t){
+							googleArray.push(t);
+						});
+						console.log(googleArray);
 					}
 				});
 				continue
@@ -77,9 +81,9 @@ router.post('/webhook', function (req, res, next) {
 
 });
 
-// function parseGoogleText(text){
+function parseGoogleText(text){
 
-// }
+}
 
 function sendTextMessage(sender, text) {
 	var messageData = {
