@@ -49,8 +49,6 @@ router.post('/webhook', function (req, res, next) {
 
 		// checking for images sent by user
 		if (event.message && event.message.text) {
-			console.log('This is the attachment for just a test message: ' + event.message.attachments[0]);
-
 			sendTextMessage(sender, "Thanks for using PictureIT! If you have some art you want to buy, take a photo of its description card and send it to me!");
 		} 
 
