@@ -6,7 +6,7 @@ var gcloud = require('gcloud');
 
 var vision = gcloud.vision({
   projectId: 'pictureit-1',
-  keyFilename: '/keyfile.json'
+  keyFilename: 'keyfile.json'
 });
 
 // middleware setup
