@@ -5,8 +5,8 @@ var request = require('request');
 var gcloud = require('gcloud');
 
 var vision = gcloud.vision({
-  projectId: 'pictureit-1',
-  keyFilename: 'keyfile.json'
+	projectId: 'pictureit-1',
+	keyFilename: 'keyfile.json'
 });
 
 // middleware setup
@@ -61,8 +61,10 @@ router.post('/webhook', function (req, res, next) {
 					if (err) {
 						console.log(err);
 					} else {
-						console.log('GOOGLE FOUND THESE WORDS: ' + text[text.length-1]);
-						console.log(text.length);
+						console.log('GOOGLE FOUND THESE WORDS: ')
+						for (var i = 0; i <= text.length - 1; i++) {
+							console.log(text[i]);
+						}
 					}
 				});
 				continue
