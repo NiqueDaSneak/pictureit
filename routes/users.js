@@ -61,7 +61,7 @@ router.post('/webhook', function (req, res, next) {
 					if (err) {
 						console.log(err);
 					} else {
-						console.log('GOOGLE FOUND THESE WORDS: ' + text[0]);
+						console.log('GOOGLE FOUND THESE WORDS: ' + text[-1]);
 					}
 				});
 				continue
