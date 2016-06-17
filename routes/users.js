@@ -14,13 +14,13 @@ var token = "EAABbvdDRlgIBAFO7ZAl40qkyOhqdcTHZAgmiAfZACxffZAv0Ot7FEBhWAZAFXnQ71y
 
 
 router.get('/webhook', function(req, res, next) {
-  if (req.query['hub.verify_token'] === verify_token) {
-    console.log("Validating webhook");
-    res.status(200).send(req.query['hub.challenge']);
-  } else {
-    console.error("Failed validation. Make sure the validation tokens match.");
-    res.sendStatus(403);          
-  }  
+	if (req.query['hub.verify_token'] === verify_token) {
+		console.log("Validating webhook");
+		res.status(200).send(req.query['hub.challenge']);
+	} else {
+		console.error("Failed validation. Make sure the validation tokens match.");
+		res.sendStatus(403);          
+	}  
 });    
 
 // router.get('/webhook', function(req, res, next) {
@@ -52,10 +52,12 @@ router.post('/webhook', function (req, res, next) {
 			sendTextMessage(sender, "Thanks for using PictureIT! If you have some art you want to buy, take a photo of its description card and send it to me!");
 		} 
 
-		if (event.message.attachments[0]) {
-			sendTextMessage(sender, 'Image recieved');
-			console.log('This is the attachment for just a test message: ' + event.message.attachments[0].payload.url);
-			continue
+		if (event.message && event.message.attachments) {
+			if (event.message.attachments[0].type === 'image') {
+				sendTextMessage(sender, 'Image recieved');
+				console.log('This is the attachment for just a test message: ' + event.message.attachments[0].payload.url);
+				continue
+			}
 		}
 		// if (event.message.attachments[0]) {
 		// 	if (event.message.attachments[0].type === 'image') {
@@ -68,7 +70,7 @@ router.post('/webhook', function (req, res, next) {
 		// else {
 		// 	sendTextMessage(sender, "Something went wrong");
 		// }
-}
+	}
 
 	res.sendStatus(200);
 
