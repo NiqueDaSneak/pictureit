@@ -61,7 +61,7 @@ router.post('/webhook', function (req, res, next) {
 					if (err) {
 						console.log(err);
 					} else {
-						console.log('GOOGLE FOUND THESE WORDS: ' + text);
+						console.log('GOOGLE FOUND THESE WORDS: ' + text[0]);
 					}
 				});
 				continue
@@ -73,6 +73,10 @@ router.post('/webhook', function (req, res, next) {
 	res.sendStatus(200);
 
 });
+
+// function parseGoogleText(text){
+
+// }
 
 function sendTextMessage(sender, text) {
 	var messageData = {
