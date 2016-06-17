@@ -64,12 +64,16 @@ router.post('/webhook', function (req, res, next) {
 						console.log(err);
 					} else {
 						var googleArray = [];
-						console.log('GOOGLE FOUND THESE WORDS: ');
 						text.forEach(function(t){
 							googleArray.push(t);
 						});
 						googleArray.shift();
-						console.log(googleArray);
+						var match = db.images.find({ keywords: googleArray.sort().toLowerCase() });
+						if (match === false) {
+							console.log('no match found');
+						} else {
+							console.log(match);
+						}
 					}
 				});
 				continue
