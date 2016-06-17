@@ -49,15 +49,17 @@ router.post('/webhook', function (req, res, next) {
 
 		// checking for images sent by user
 		if (event.message && event.message.text) {
+			console.log('This is the attachment for just a test message: ' + event.message.attachments[0]);
+
 			sendTextMessage(sender, "Thanks for using PictureIT! If you have some art you want to buy, take a photo of its description card and send it to me!");
 		} 
 
-		if (event.postback) {
-			sendTextMessage(sender, 'Image recieved');
-			console.log("This is the event.postback: "+ event.postback);
-			continue
+		// if (event.postback) {
+		// 	sendTextMessage(sender, 'Image recieved');
+		// 	console.log("This is the event.postback: "+ event.postback);
+		// 	continue
 
-		}
+		// }
 		// if (event.message.attachments[0]) {
 		// 	if (event.message.attachments[0].type === 'image') {
 		// 		var imageURL = event.message.attachments[0].payload.url;
