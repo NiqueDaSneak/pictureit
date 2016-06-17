@@ -68,6 +68,7 @@ router.post('/webhook', function (req, res, next) {
 						text.forEach(function(t){
 							googleArray.push(t);
 						});
+						googleArray.shift();
 						console.log(googleArray);
 					}
 				});
