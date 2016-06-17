@@ -2,6 +2,12 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var request = require('request');
+var gcloud = require('gcloud');
+
+var vision = gcloud.vision({
+  projectId: 'pictureit-1',
+  keyFilename: '/keyfile.json'
+});
 
 // middleware setup
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -37,15 +43,10 @@ router.post('/webhook', function (req, res, next) {
 
 	var messaging_events = req.body.entry[0].messaging;
 
-	// console.log("This is the messaging_events: " + messaging_events)
-
 	for (var i = 0; i < messaging_events.length; i++) {
 
 		var event = req.body.entry[0].messaging[i];
 		var sender = event.sender.id;
-
-// console.log('XXXXXXX' + event.message.text + 'XXXXXXX');
-// console.log('!!!!!!!!!!!!!' + event.message.attachments + '!!!!!!!!!!!!!');
 
 		// checking for images sent by user
 		if (event.message && event.message.text) {
@@ -56,20 +57,17 @@ router.post('/webhook', function (req, res, next) {
 			if (event.message.attachments[0].type === 'image') {
 				sendTextMessage(sender, 'Image recieved');
 				console.log('This is the attachment for just a test message: ' + event.message.attachments[0].payload.url);
+				vision.detectText(event.message.attachments[0].payload.url, function(err, text){
+					if (err) {
+						console.log(err);
+					} else {
+						console.log('GOOGLE FOUND THESE WORDS: ' + text);
+					}
+				});
 				continue
 			}
 		}
-		// if (event.message.attachments[0]) {
-		// 	if (event.message.attachments[0].type === 'image') {
-		// 		var imageURL = event.message.attachments[0].payload.url;
-		// 		console.log(imageURL);
-		// 		sendTextMessage(sender, 'Image recieved');
-		// 	}
-		// } 
 
-		// else {
-		// 	sendTextMessage(sender, "Something went wrong");
-		// }
 	}
 
 	res.sendStatus(200);
