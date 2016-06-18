@@ -77,6 +77,7 @@ router.post('/webhook', function (req, res, next) {
 								console.log(doc);
 							}
 						});
+						console.log(match)
 						if (match.length === 0) {
 							sendTextMessage(sender, "Sorry, no match")
 						} else {
