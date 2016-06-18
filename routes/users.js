@@ -67,11 +67,11 @@ router.post('/webhook', function (req, res, next) {
 					} else {
 						var googleArray = [];
 						text.forEach(function(t){
-							googleArray.push(t);
+							googleArray.push(t).toLowerCase();
 						});
-						googleArray.shift();
+						googleArray.shift().toLowerCase();
 						console.log(googleArray);
-						Image.findOne({ keywords: googleArray.sort().toLowerCase() }, function(err, doc){
+						Image.findOne({ keywords: googleArray.sort() }, function(err, doc){
 							console.log(doc);
 						});
 						// db.collection('Image', function(err, collection){
