@@ -73,19 +73,13 @@ router.post('/webhook', function (req, res, next) {
 						Image.findOne({ keywords: googleArray.sort() }, function(err, doc){
 							if (err) {
 								console.log(err);
+							sendTextMessage(sender, "Sorry, no match")
 							} else {
 								match = doc.toObject();
 								// console.log(doc);
+							sendTextMessage(sender, `The price of this item is ${match.price}`)
 							}
 						});
-						// console.log('This should be an object' + match);
-						console.log('Match is equal to true:')
-						console.log(match === true)
-						if (match.length > 0) {
-							sendTextMessage(sender, `The price of this item is ${match.price}`)
-						} else {
-							sendTextMessage(sender, "Sorry, no match")
-						}
 					}
 				});
 			}
