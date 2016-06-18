@@ -56,6 +56,7 @@ router.post('/webhook', function (req, res, next) {
 		} 
 
 		if (event.message && event.message.attachments) {
+			var match = '';
 			if (event.message.attachments[0].type === 'image') {
 				sendTextMessage(sender, 'Image recieved');
 				console.log('This is the attachment for just a test message: ' + event.message.attachments[0].payload.url);
@@ -68,7 +69,13 @@ router.post('/webhook', function (req, res, next) {
 							googleArray.push(t);
 						});
 						googleArray.shift();
-						var match = db.images.find({ keywords: googleArray.sort().toLowerCase() });
+						db.collection('Image', function(err, collection){
+							if (err) {
+								console.log(err);
+							} else {
+								match = collection.find({ keywords: googleArray.sort().toLowerCase() });
+							}
+						});
 						if (match === false) {
 							console.log('no match found');
 						} else {
@@ -76,7 +83,6 @@ router.post('/webhook', function (req, res, next) {
 						}
 					}
 				});
-				continue
 			}
 		}
 
