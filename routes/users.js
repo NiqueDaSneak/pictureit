@@ -64,7 +64,7 @@ router.post('/webhook', function (req, res, next) {
 				vision.detectText(event.message.attachments[0].payload.url, function(err, text){
 					if (err) {
 						console.log(err);
-					} else {
+					} else {``
 						var googleArray = [];
 						text.forEach(function(t){
 							googleArray.push(t.toLowerCase());
@@ -78,7 +78,9 @@ router.post('/webhook', function (req, res, next) {
 								console.log(doc);
 							}
 						});
-						console.log('This should be an object' + match);
+						// console.log('This should be an object' + match);
+						console.log('Match is equal to true:')
+						console.log(match === true)
 						if (match) {
 							sendTextMessage(sender, `The price of this item is ${match.price}`)
 						} else {
