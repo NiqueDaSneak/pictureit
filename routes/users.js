@@ -79,10 +79,10 @@ router.post('/webhook', function (req, res, next) {
 							}
 						});
 						console.log('This should be an object' + match);
-						if (match.length === 0) {
-							sendTextMessage(sender, "Sorry, no match")
-						} else {
+						if (match) {
 							sendTextMessage(sender, `The price of this item is ${match.price}`)
+						} else {
+							sendTextMessage(sender, "Sorry, no match")
 						}
 					}
 				});
