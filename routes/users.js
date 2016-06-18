@@ -70,19 +70,18 @@ router.post('/webhook', function (req, res, next) {
 							googleArray.push(t.toLowerCase());
 						});
 						googleArray.shift().toLowerCase();
-						console.log(googleArray);
-						Image.findOne({ keywords: googleArray.sort() }, function(err, doc){
-							console.log(doc);
+						match = Image.findOne({ keywords: googleArray.sort() }, function(err, doc){
+							if (err) {
+								console.log(err);
+							} else {
+								console.log(doc);
+							}
 						});
-						// db.collection('Image', function(err, collection){
-						// 	if (err) {
-						// 		console.log(err);
-						// 	} else {
-						// 		console.log('no error');
-						// 		match = collection.find({ keywords: googleArray.sort().toLowerCase() });
-						// 		console.log(match);
-						// 	}
-						// });
+						if (match.length === 0) {
+							sendTextMessage(sender, "Sorry, no match")
+						} else {
+							sendTextMessage(sender, `The price of this item is ${match.price}`)
+						}
 					}
 				});
 			}
