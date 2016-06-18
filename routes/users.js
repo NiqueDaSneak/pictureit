@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var gcloud = require('gcloud');
 var mongoose = require('mongoose');
+var Image = require('./../models/image.js');
 var db = require('./../db');
 
 var vision = gcloud.vision({
@@ -70,15 +71,18 @@ router.post('/webhook', function (req, res, next) {
 						});
 						googleArray.shift();
 						console.log(googleArray);
-						db.collection('Image', function(err, collection){
-							if (err) {
-								console.log(err);
-							} else {
-								console.log('no error');
-								match = collection.find({ keywords: googleArray.sort().toLowerCase() });
-								console.log(match);
-							}
+						Image.findOne({ keywords: googleArray.sort().toLowerCase() }, function(err, doc){
+							console.log(doc);
 						});
+						// db.collection('Image', function(err, collection){
+						// 	if (err) {
+						// 		console.log(err);
+						// 	} else {
+						// 		console.log('no error');
+						// 		match = collection.find({ keywords: googleArray.sort().toLowerCase() });
+						// 		console.log(match);
+						// 	}
+						// });
 					}
 				});
 			}
