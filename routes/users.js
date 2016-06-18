@@ -70,14 +70,14 @@ router.post('/webhook', function (req, res, next) {
 							googleArray.push(t.toLowerCase());
 						});
 						googleArray.shift().toLowerCase();
-						match = Image.findOne({ keywords: googleArray.sort() }, function(err, doc){
+						Image.findOne({ keywords: googleArray.sort() }, function(err, doc){
 							if (err) {
 								console.log(err);
 							} else {
+								match = doc.toObject();
 								console.log(doc);
 							}
 						});
-						match = match.toObject();
 						console.log('This should be an object' + match);
 						if (match.length === 0) {
 							sendTextMessage(sender, "Sorry, no match")
