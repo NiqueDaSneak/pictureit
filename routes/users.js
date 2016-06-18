@@ -69,18 +69,16 @@ router.post('/webhook', function (req, res, next) {
 							googleArray.push(t);
 						});
 						googleArray.shift();
+						console.log(googleArray);
 						db.collection('Image', function(err, collection){
 							if (err) {
 								console.log(err);
 							} else {
+								console.log('no error');
 								match = collection.find({ keywords: googleArray.sort().toLowerCase() });
+								console.log(match);
 							}
 						});
-						if (match === false) {
-							console.log('no match found');
-						} else {
-							console.log(match);
-						}
 					}
 				});
 			}
