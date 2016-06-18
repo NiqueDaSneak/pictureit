@@ -67,7 +67,7 @@ router.post('/webhook', function (req, res, next) {
 					} else {
 						var googleArray = [];
 						text.forEach(function(t){
-							googleArray.push(t).toLowerCase();
+							googleArray.push(t.toLowerCase());
 						});
 						googleArray.shift().toLowerCase();
 						console.log(googleArray);
