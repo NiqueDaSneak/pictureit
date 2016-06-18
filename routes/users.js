@@ -75,13 +75,13 @@ router.post('/webhook', function (req, res, next) {
 								console.log(err);
 							} else {
 								match = doc.toObject();
-								console.log(doc);
+								// console.log(doc);
 							}
 						});
 						// console.log('This should be an object' + match);
 						console.log('Match is equal to true:')
 						console.log(match === true)
-						if (match) {
+						if (match.length > 0) {
 							sendTextMessage(sender, `The price of this item is ${match.price}`)
 						} else {
 							sendTextMessage(sender, "Sorry, no match")
