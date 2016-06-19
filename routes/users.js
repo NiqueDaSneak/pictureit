@@ -71,7 +71,7 @@ router.post('/webhook', function (req, res, next) {
 								match = doc.toObject();
 								// console.log(doc);
 							// sendTextMessage(sender, `The price of this item is ${match.price}`);
-							sendReceiptMessage(sender, this);
+							sendReceiptMessage(sender, match);
 							}
 						});
 					}
@@ -93,7 +93,7 @@ function sendReceiptMessage(sender, objectForSale) {
 				"template_type": "receipt",
 				"recipient_name": sender.first_name,
 				"order_number": "J3J4H5J43",
-				"currency": "dollar",
+				"currency": "USD",
 				"payment_method": "Visa 4537",
 				// "timestamp": "current time"
 				"order_url": "link to webpage",
@@ -102,7 +102,7 @@ function sendReceiptMessage(sender, objectForSale) {
 					"subtitle": objectForSale.artistName,
 					"quantity": "1",
 					"price": objectForSale.price,
-					"currency": "dollar",
+					"currency": "USD",
 					"image_url": "https://placehold.it/350x150"
 				}],
 				"address": [{
