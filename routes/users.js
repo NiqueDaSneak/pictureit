@@ -97,21 +97,22 @@ function sendReceiptMessage(sender, objectForSale) {
 				"payment_method": "Visa 4537",
 				// "timestamp": "current time"
 				// "order_url": "link to webpage",
-				"elements":{
+				"elements":{[
 					"title": objectForSale.nameOfPiece,
-					"subtitle": objectForSale.artistName,
-					"quantity": "1",
-					"price": objectForSale.price,
-					"currency": "USD",
-					"image_url": "https://placehold.it/350x150"
+					// "subtitle": objectForSale.artistName,
+					// "quantity": "1",
+					// "price": objectForSale.price,
+					// "currency": "USD",
+					// "image_url": "https://placehold.it/350x150"
+					]
 				},
-				"address": {
-					"street_1": "1234 Street Drive",
-					"city": "Cincinnati",
-					"postal_code": "45209",
-					"state": "OH",
-					"country": "US"
-				},
+				// "address": {
+				// 	"street_1": "1234 Street Drive",
+				// 	"city": "Cincinnati",
+				// 	"postal_code": "45209",
+				// 	"state": "OH",
+				// 	"country": "US"
+				// },
 				"summary": {
 					"total_cost": objectForSale.price
 				}
@@ -132,7 +133,7 @@ function sendReceiptMessage(sender, objectForSale) {
 		} else if (response.body.error) {
 			console.log('Error: ', response.body.error)
 		}
-	})
+	});
 }
 
 function parseGoogleText(text){
