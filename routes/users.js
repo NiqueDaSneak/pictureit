@@ -94,7 +94,7 @@ function sendReceiptMessage(sender, objectForSale) {
 				"recipient_name": sender.first_name,
 				"order_number": "J3J4H5J43",
 				"currency": "USD",
-				"payment_method": "Visa 4537"
+				"payment_method": "Visa 4537",
 				// "timestamp": "current time"
 				// "order_url": "link to webpage",
 				"elements":[{
