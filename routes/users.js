@@ -105,14 +105,16 @@ function sendReceiptMessage(sender, objectForSale) {
 					"currency": "USD",
 					"image_url": "https://placehold.it/350x150"
 				}],
-				"address": [{
-					"street_1": "1234 Street Drive",
-					"city": "Cincinnati",
-					"postal_code": "45209",
-					"state": "OH",
-					"country": "US"
-				}],
-				"summary": "This is a summary of your order. To charge your card respond 'Confirm'."
+				// "address": [{
+				// 	"street_1": "1234 Street Drive",
+				// 	"city": "Cincinnati",
+				// 	"postal_code": "45209",
+				// 	"state": "OH",
+				// 	"country": "US"
+				// }],
+				"summary": [{
+					"total_cost": objectForSale.price
+				}]
 			}
 		}
 	}
