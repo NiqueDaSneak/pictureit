@@ -97,14 +97,13 @@ function sendReceiptMessage(sender, objectForSale) {
 				"payment_method": "Visa 4537",
 				// "timestamp": "current time"
 				// "order_url": "link to webpage",
-				"elements":{[
+				"elements":{
 					"title": objectForSale.nameOfPiece,
 					// "subtitle": objectForSale.artistName,
 					// "quantity": "1",
 					// "price": objectForSale.price,
 					// "currency": "USD",
 					// "image_url": "https://placehold.it/350x150"
-					]
 				},
 				// "address": {
 				// 	"street_1": "1234 Street Drive",
