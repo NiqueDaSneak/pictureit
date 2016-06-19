@@ -66,14 +66,14 @@ router.post('/webhook', function (req, res, next) {
 						Image.findOne({ keywords: googleArray.sort() }, function(err, doc){
 							if (err) {
 								console.log(err);
-								sendTextMessage(sender, "Sorry, no match");
+							sendTextMessage(sender, "Sorry, no match");
 							} else {
 								match = doc.toObject();
 								// console.log(doc);
 							// sendTextMessage(sender, `The price of this item is ${match.price}`);
 							sendReceiptMessage(sender, match);
-						}
-					});
+							}
+						});
 					}
 				});
 			}
@@ -94,15 +94,16 @@ function sendReceiptMessage(sender, objectForSale) {
 				"recipient_name": sender.first_name,
 				"order_number": "J3J4H5J43",
 				"currency": "USD",
-				"payment_method": "Visa 4537",
+				"payment_method": "Visa 4537"
 				// "timestamp": "current time"
-				"order_url": "link to webpage",
+				// "order_url": "link to webpage",
 				"elements":[{
 					"title": objectForSale.nameOfPiece,
 					"subtitle": objectForSale.artistName,
 					"quantity": "1",
 					"price": objectForSale.price,
-					"currency": "USD"
+					"currency": "USD",
+					"image_url": "https://placehold.it/350x150"
 				}],
 				"address": [{
 					"street_1": "1234 Street Drive",
