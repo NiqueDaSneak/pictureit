@@ -32,15 +32,7 @@ router.get('/webhook', function(req, res, next) {
 	}  
 });    
 
-// router.get('/webhook', function(req, res, next) {
-
-// 	if (req.query['hub.verify_token'] === verify_token) {
-// 		res.send(req.query['hub.challenge']);
-// 	}
-
-// 	res.send('Error, wrong validation token');
-
-// });
+// Route that handles messages from user
 
 router.post('/webhook', function (req, res, next) {
 
@@ -51,11 +43,12 @@ router.post('/webhook', function (req, res, next) {
 		var event = req.body.entry[0].messaging[i];
 		var sender = event.sender.id;
 
-		// checking for images sent by user
+		// when a user sends a text message
 		if (event.message && event.message.text) {
 			sendTextMessage(sender, "Thanks for using PictureIT! If you have some art you want to buy, take a photo of its description card and send it to me!");
 		} 
 
+		// when a user sends an image
 		if (event.message && event.message.attachments) {
 			var match = '';
 			if (event.message.attachments[0].type === 'image') {
@@ -73,11 +66,12 @@ router.post('/webhook', function (req, res, next) {
 						Image.findOne({ keywords: googleArray.sort() }, function(err, doc){
 							if (err) {
 								console.log(err);
-							sendTextMessage(sender, "Sorry, no match")
+							sendTextMessage(sender, "Sorry, no match");
 							} else {
 								match = doc.toObject();
 								// console.log(doc);
-							sendTextMessage(sender, `The price of this item is ${match.price}`)
+							// sendTextMessage(sender, `The price of this item is ${match.price}`);
+							sendReceiptMessage(sender, this);
 							}
 						});
 					}
@@ -91,8 +85,55 @@ router.post('/webhook', function (req, res, next) {
 
 });
 
-function parseGoogleText(text){
+function sendReceiptMessage(sender, objectForSale) {
+	messageData = {
+		"attachment": {
+			"type": "template",
+			"payload": {
+				"template_type": "receipt",
+				"recipient_name": sender.first_name,
+				"order_number": "J3J4H5J43",
+				"currency": "dollar",
+				"payment_method": "Visa 4537",
+				// "timestamp": "current time"
+				"order_url": "link to webpage",
+				"elements":[{
+					"title": objectForSale.nameOfPiece,
+					"subtitle": objectForSale.artistName,
+					"quantity": "1",
+					"price": objectForSale.price,
+					"currency": "dollar",
+					"image_url": "https://placehold.it/350x150"
+				}],
+				"address": [{
+					"street_1": "1234 Street Drive",
+					"city": "Cincinnati",
+					"postal_code": "45209",
+					"state": "OH",
+					"country": "US"
+				}],
+				"summary": "This is a summary of your order. To charge your card respond 'Confirm'."
+			}
+		}
+	}
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
+		qs: {access_token:token},
+		method: 'POST',
+		json: {
+			recipient: {id:sender},
+			message: messageData,
+		}
+	}, function(error, response, body) {
+		if (error) {
+			console.log('Error sending messages: ', error)
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error)
+		}
+	})
+}
 
+function parseGoogleText(text){
 }
 
 function sendTextMessage(sender, text) {
