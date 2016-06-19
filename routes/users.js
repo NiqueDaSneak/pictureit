@@ -70,8 +70,8 @@ router.post('/webhook', function (req, res, next) {
 							} else {
 								match = doc.toObject();
 								// console.log(doc);
-							// sendTextMessage(sender, `The price of this item is ${match.price}`);
-							sendReceiptMessage(sender, match);
+							sendTextMessage(sender, `The price of this item is ${match.price}`);
+							// sendReceiptMessage(sender, match);
 							}
 						});
 					}
